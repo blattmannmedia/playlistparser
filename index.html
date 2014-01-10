@@ -11,10 +11,18 @@
     <body>
         <input type="file" id="fileinput" name="fileinput" class="hideBrowse" multiple />
         <label for="fileinput" class="btn btn-large">Select file</label>
-        <form>
-            <div id="wrap"></div>
-            <button>Save to database</button>
-        </form>
+         
+            <div id="wrap">
+                <div id="filename"></div>
+                <div id="filetype"></div>
+                
+                <form>
+                    <div id="playlist"></div>
+                    <button>Save to database</button>
+                </form>
+                
+            </div>
+            
         <!-- Vendor Libs: jQuery only used for Bootstrap functionality -->
         <script src="libs/jquery-1.9.1.min.js"></script>
 

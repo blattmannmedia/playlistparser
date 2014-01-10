@@ -6,10 +6,11 @@ $(document).ready(function($){
 
 // Global vars
 var readMultipleFiles = function(event) {
-    $('#wrap').empty();
+    // clear the DOM
+    $('#playlist').empty();
+
     // Retrieve all the files from the FileList object
-    var files = event.target.files,
-        output = $("#wrap");
+    var files = event.target.files;
 
     if (files) {
         for (var i = 0, f; f = files[i]; i++) {
@@ -20,8 +21,8 @@ var readMultipleFiles = function(event) {
                         filename = f.name,
                         extension = filename.substr((filename.lastIndexOf('.')+1));
 
-                    $('#wrap').append('filename: ' + filename + '<br />');
-                    $('#wrap').append('extension: ' + extension + '<br />');
+                    $('#filename').empty().append('filename: ' + filename + '<br />');
+                    $('#filetype').empty().append('extension: ' + extension + '<br />');
 
                     // Choose the right parser
                     switch(extension) {
@@ -86,15 +87,11 @@ var parseXml = function(contents, extension) {
                     // Extract the needed content
                     fileArtist = $(this).find('author').text();
                     fileTitle = $(this).find('title').text();
-
-                    console.log('asx');
                     break;
                 case 'nml': // Native Instruments: Traktor
                     // Extract the needed content
                     fileArtist = $(this).attr('artist');
                     fileTitle = $(this).attr('title');
-
-                    console.log('nml');
                     break;
                 default:
                     // Extract the needed content
@@ -216,11 +213,11 @@ var parsePls = function(contents) {
 var sendOutput = function(i, j, artist, title) {
     var fileOutput = '';
     fileOutput += j + '. - ';
-    fileOutput += '<input type="text" name="artist" id="+i+" value="' + artist.trim() + '">';
+    fileOutput += '<input type="text" name="artist" id="'+i+'" value="' + artist.trim() + '">'+'\n';
     fileOutput += ' - ';
-    fileOutput += '<input type="text" name="title" id="+i+" value="' + title.trim() + '">';
-    fileOutput += '<br />';
-    $('#wrap').append(fileOutput);
+    fileOutput += '<input type="text" name="title" id="'+i+'" value="' + title.trim() + '">';
+    fileOutput += '<br />'+'\n';
+    $('#playlist').append(fileOutput);
 }
 
 /*
