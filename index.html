@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Playlist Parser</title>
+        <!-- Fix for old browsers -->
+        <script src="libs/es5-shim.min.js"></script>
+        <link rel="stylesheet" href="css/bootstrap.min.css" />
+        <link rel="stylesheet" href="css/custom.css" />
+    </head>
+    <body>
+        <input type="file" id="fileinput" name="fileinput" class="hideBrowse" multiple />
+        <label for="fileinput" class="btn btn-large">Select file</label>
+        <form>
+            <div id="wrap"></div>
+            <button>Save to database</button>
+        </form>
+        <!-- Vendor Libs: jQuery only used for Bootstrap functionality -->
+        <script src="libs/jquery-1.9.1.min.js"></script>
+
+        <!-- UI Libs -->
+        <script src="libs/bootstrap.min.js"></script>
+
+        <!-- project scripts -->
+        <script src="scripts/parser.js"></script>
+    </body>
+</html>
