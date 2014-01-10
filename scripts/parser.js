@@ -5,9 +5,6 @@ $(document).ready(function($){
 });
 
 // Global vars
-var fileArtist = '',
-    fileTitle = '';
-
 var readMultipleFiles = function(event) {
     $('#wrap').empty();
     // Retrieve all the files from the FileList object
@@ -37,7 +34,7 @@ var readMultipleFiles = function(event) {
                         case 'txt':
 
                             break;
-                        case 'xml': // Native Instruments: Traktor
+                        case 'xml':
                             parseXml(contents, extension);
                             break;
                         case 'nml': // Native Instruments: Traktor
@@ -61,28 +58,61 @@ var readMultipleFiles = function(event) {
 
 var parseXml = function(contents, extension) {
     var i = 0, j = i,
-        fileFilter = 'entry';
+        fileFilter = 'entry',
+        fileArtist = '',
+        fileTitle = '',
+        iDetect = false,
+        iFilter = 'key',
+        item = '';
+
+    $(contents).find(iFilter).each(function() {
+        fileFilter = iFilter;
+        iDetect = true;
+        return;
+    });
 
     $(contents).find(fileFilter).each(function() {
         // Choose the right content parser
-        switch(extension) {
-            case 'asx': // Windows Media Player
-                // Extract the needed content
-                fileArtist = $(this).find('author').text();
-                fileTitle = $(this).find('title').text();
-                break;
-            default: // Native Instruments: Traktor
-                // Extract the needed content
-                fileArtist = $(this).attr('artist');
-                fileTitle = $(this).attr('title');
-                break;
+        if (iDetect) {
+            item = $(this).text();
+            // Extract the needed content
+            if(item === 'Name') {
+                fileTitle = $(this).next().text();
+                fileArtist = $(this).next().next().next().text();
+            }
+        } else {
+            switch(extension) {
+                case 'asx': // Windows Media Player
+                    // Extract the needed content
+                    fileArtist = $(this).find('author').text();
+                    fileTitle = $(this).find('title').text();
+
+                    console.log('asx');
+                    break;
+                case 'nml': // Native Instruments: Traktor
+                    // Extract the needed content
+                    fileArtist = $(this).attr('artist');
+                    fileTitle = $(this).attr('title');
+
+                    console.log('nml');
+                    break;
+                default:
+                    // Extract the needed content
+                    fileArtist = $(this).attr('artist');
+                    fileTitle = $(this).attr('title');
+                    break;
+            }
         }
-        // Only execute if artis or title are present
+        
+        // Only execute if artist or title are present
         if(fileArtist || fileTitle) {
             i++;
             j = (i < 10 ? j = '0' + i : j = i);
             // Append it to the DOM
             sendOutput(i, j, fileArtist, fileTitle);
+            // Reset the vars
+            fileArtist = '';
+            fileTitle = '';
         }
     });
 }
@@ -90,6 +120,8 @@ var parseXml = function(contents, extension) {
 var parseWpl = function(contents) {
     var i = 0, j = i,
         fileFilter = 'media',
+        fileArtist = '',
+        fileTitle = '',
         lineFilter = '',
         outLine = '';
 
@@ -105,7 +137,7 @@ var parseWpl = function(contents) {
         fileArtist = outLine.split(splitEx)[0];
         fileTitle = outLine.split(splitEx)[1].replace(extensionEx,'');;
 
-        // Only execute if artis or title are present
+        // Only execute if artist or title are present
         if(fileArtist || fileTitle) {
             i++;
             j = (i < 10 ? j = '0' + i : j = i);
@@ -117,7 +149,9 @@ var parseWpl = function(contents) {
 
 var parseM3u = function(contents) {
     var i = 0, j = i, k = i,
-        fileComment = '#extinf',
+        fileFilter = '#extinf',
+        fileArtist = '',
+        fileTitle = '',
         fileLine = '',
         currLine = '',
         outLine = '',
@@ -131,7 +165,7 @@ var parseM3u = function(contents) {
     // Let's go!
     lines = contents.split(lineEx);
     for(i; i < lines.length; i++) {
-        fileLine = lines[i].toLowerCase().indexOf(fileComment);
+        fileLine = lines[i].toLowerCase().indexOf(fileFilter);
         if (fileLine === 0) {
             k++;
             j = (k < 10 ? j = '0' + k : j = k);
@@ -147,7 +181,9 @@ var parseM3u = function(contents) {
 
 var parsePls = function(contents) {
     var i = 0, j = i, k = i,
-        fileComment = 'title',
+        fileFilter = 'title',
+        fileArtist = '',
+        fileTitle = '',
         fileLine = '',
         currLine = '',
         outLine = '',
@@ -162,7 +198,7 @@ var parsePls = function(contents) {
     // Let's go!
     lines = contents.split(lineEx);
     for(i; i < lines.length; i++) {
-        fileLine = lines[i].toLowerCase().indexOf(fileComment);
+        fileLine = lines[i].toLowerCase().indexOf(fileFilter);
         if (fileLine === 0) {
             k++;
             j = (k < 10 ? j = '0' + k : j = k);
