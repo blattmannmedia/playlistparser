@@ -4,9 +4,8 @@ $(document).ready(function($){
     });
 });
 
-// Global vars
 var readMultipleFiles = function(event) {
-    // clear the DOM
+    // Clear the DOM
     $('#playlist').empty();
 
     // Retrieve all the files from the FileList object
@@ -21,8 +20,9 @@ var readMultipleFiles = function(event) {
                         filename = f.name,
                         extension = filename.substr((filename.lastIndexOf('.')+1));
 
-                    $('#filename').empty().append('filename: ' + filename + '<br />');
-                    $('#filetype').empty().append('extension: ' + extension + '<br />');
+                    // Append additional info
+                    $('#filename').empty().append('Filename: ' + filename + '<br />');
+                    $('#filetype').empty().append('Extension: ' + extension + '<br />');
 
                     // Choose the right parser
                     switch(extension) {
@@ -53,7 +53,7 @@ var readMultipleFiles = function(event) {
             reader.readAsText(f);
         }
     } else {
-        alert("Failed to load files");
+        $('#playlist').append("Failed to load files");
     }
 }
 
@@ -66,6 +66,7 @@ var parseXml = function(contents, extension) {
         iFilter = 'key',
         item = '';
 
+    // Check if playlist comes from iTunes
     $(contents).find(iFilter).each(function() {
         fileFilter = iFilter;
         iDetect = true;
@@ -74,7 +75,7 @@ var parseXml = function(contents, extension) {
 
     $(contents).find(fileFilter).each(function() {
         // Choose the right content parser
-        if (iDetect) {
+        if (iDetect) { // iTunes
             item = $(this).text();
             // Extract the needed content
             if(item === 'Name') {
@@ -89,11 +90,6 @@ var parseXml = function(contents, extension) {
                     fileTitle = $(this).find('title').text();
                     break;
                 case 'nml': // Native Instruments: Traktor
-                    // Extract the needed content
-                    fileArtist = $(this).attr('artist');
-                    fileTitle = $(this).attr('title');
-                    break;
-                default:
                     // Extract the needed content
                     fileArtist = $(this).attr('artist');
                     fileTitle = $(this).attr('title');
@@ -209,7 +205,7 @@ var parsePls = function(contents) {
     }
 }
 
-// Send to HTML
+// Append to HTML
 var sendOutput = function(i, j, artist, title) {
     var fileOutput = '';
     fileOutput += j + '. - ';
