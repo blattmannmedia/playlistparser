@@ -6,23 +6,49 @@
         <!-- Fix for old browsers -->
         <script src="libs/es5-shim.min.js"></script>
         <link rel="stylesheet" href="css/bootstrap.min.css" />
+        <link rel="stylesheet" href="css/bootstrap-responsive.min" />
         <link rel="stylesheet" href="css/custom.css" />
     </head>
     <body>
-        <input type="file" id="fileinput" name="fileinput" class="hideBrowse" multiple />
-        <label for="fileinput" class="btn btn-large">Select file</label>
-         
+        <header>
+            <h1>Multiple Playlist Parser</h1>
+            <article>
+                The Multiple Playlist Parser can be used to parse the following playlist types on the fly:
+                <ul>
+                    <li>nml (Native Instruments Traktor)</li>
+                    <li>asx (Windows Media Player, old)</li>
+                    <li>wpl (Windows Media Player, current)</li>
+                    <li>iTunes xml</li>
+                    <li>m3u</li>
+                    <li>pls</li>
+                </ul>
+                <p>
+                    Usage:<br />
+                    Select your playlist from your harddrive. Once selected the parser will immediatelly display your playlist in a form (only Artist and Title will be displayed).
+                </p>
+            </article>
+        </header>
+
+        <div id="content">
+            <input type="file" id="fileinput" name="fileinput" class="hideBrowse" multiple />
+            <label for="fileinput" class="btn btn-large">Select file</label>
+             
             <div id="wrap">
                 <div id="filename"></div>
                 <div id="filetype"></div>
                 
                 <form>
                     <div id="playlist"></div>
-                    <button>Save to database</button>
+                    <!--button>Save to database</button-->
                 </form>
                 
             </div>
-            
+        </div>
+
+        <footer>
+
+        </footer>
+
         <!-- Vendor Libs: jQuery only used for Bootstrap functionality -->
         <script src="libs/jquery-1.9.1.min.js"></script>
 
