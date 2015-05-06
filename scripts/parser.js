@@ -210,8 +210,8 @@ var sendOutput = function(i, j, artist, title) {
 
     fileOutput += '<div class="input-group">\n';
     fileOutput += '<span class="input-group-addon">'+j+'</span>\n';
-    fileOutput += '<div class="col-lg-6 inputLeft"><input type="text" class="form-control" name="artist" id="'+i+'" value="' + artist.trim() + '"></div>\n';
-    fileOutput += '<div class="col-lg-6 inputLeft"><input type="text" class="form-control" name="title" id="'+i+'" value="' + title.trim() + '"></div>\n';
+    fileOutput += '<div class="col-lg-6 inputLeft"><input type="text" class="form-control" name="artist" id="name_'+i+'" value="' + artist.trim() + '"></div>\n';
+    fileOutput += '<div class="col-lg-6 inputLeft"><input type="text" class="form-control" name="title" id="title_'+i+'" value="' + title.trim() + '"></div>\n';
     fileOutput += '</div>';
 
     $('#playlist').append(fileOutput);
