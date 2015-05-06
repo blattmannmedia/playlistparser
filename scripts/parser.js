@@ -21,8 +21,7 @@ var readMultipleFiles = function(event) {
                         extension = filename.substr((filename.lastIndexOf('.')+1));
 
                     // Append additional info
-                    $('#filename').empty().append('Filename: ' + filename + '<br />');
-                    $('#filetype').empty().append('Extension: ' + extension + '<br />');
+                    $('#filename').empty().append('<h3>' + filename + '</h3> <span class="badge">' + extension + '</span>');
 
                     // Choose the right parser
                     switch(extension) {
@@ -208,11 +207,13 @@ var parsePls = function(contents) {
 // Append to HTML
 var sendOutput = function(i, j, artist, title) {
     var fileOutput = '';
-    fileOutput += j + '. - ';
-    fileOutput += '<input type="text" name="artist" id="'+i+'" value="' + artist.trim() + '">'+'\n';
-    fileOutput += ' - ';
-    fileOutput += '<input type="text" name="title" id="'+i+'" value="' + title.trim() + '">';
-    fileOutput += '<br />'+'\n';
+
+    fileOutput += '<div class="input-group">\n';
+    fileOutput += '<span class="input-group-addon">'+j+'</span>\n';
+    fileOutput += '<div class="col-lg-6 inputLeft"><input type="text" class="form-control" name="artist" id="'+i+'" value="' + artist.trim() + '"></div>\n';
+    fileOutput += '<div class="col-lg-6 inputLeft"><input type="text" class="form-control" name="title" id="'+i+'" value="' + title.trim() + '"></div>\n';
+    fileOutput += '</div>';
+
     $('#playlist').append(fileOutput);
 }
 

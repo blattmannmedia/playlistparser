@@ -3,59 +3,87 @@
     <head>
         <meta charset="utf-8">
         <title>Playlist Parser</title>
-        <!-- Fix for old browsers -->
-        <script src="libs/es5-shim.min.js"></script>
-        <link rel="stylesheet" href="css/bootstrap.min.css" />
-        <link rel="stylesheet" href="css/bootstrap-responsive.min" />
-        <link rel="stylesheet" href="css/custom.css" />
-    </head>
-    <body>
-        <header>
-            <h1>Multiple Playlist Parser</h1>
-            <article>
-                The Multiple Playlist Parser can be used to parse the following playlist types on the fly:
-                <ul>
-                    <li>nml (Native Instruments Traktor)</li>
-                    <li>asx (Windows Media Player, old)</li>
-                    <li>wpl (Windows Media Player, current)</li>
-                    <li>iTunes xml</li>
-                    <li>m3u</li>
-                    <li>pls</li>
-                </ul>
-                <p>
-                    Usage:<br />
-                    Select your playlist from your harddrive. Once selected the parser will immediatelly display your playlist in a form (only Artist and Title will be displayed).
-                </p>
-            </article>
-        </header>
 
-        <div id="content">
-            <input type="file" id="fileinput" name="fileinput" class="hideBrowse" multiple />
-            <label for="fileinput" class="btn btn-large">Select file</label>
-             
-            <div id="wrap">
-                <div id="filename"></div>
-                <div id="filetype"></div>
-                
-                <form>
-                    <div id="playlist"></div>
-                    <!--button>Save to database</button-->
-                </form>
-                
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="./css/custom.css" />
+
+    </head>
+
+    <body screen_capture_injected="true">
+
+        <div class="container">
+            
+            <div class="header clearfix">
+                <nav>
+                    <ul class="nav nav-pills pull-right">
+                        <li role="presentation" class="active"><a href="https://github.com/youpload/playlistparser" target="_blank">Download</a></li>
+                    </ul>
+                </nav>
+                <h3 class="text-muted">Multiple Playlist Parser</h3>
             </div>
+
+            <div class="jumbotron">
+                <h1>Multiple Playlist Parser</h1>
+                <div class="lead">
+                    <p>The Multiple Playlist Parser can be used to parse the following playlist types on the fly:</p>
+                    <ul class="list-group">
+                        <li class="list-group-item">Native Instruments Traktor <span class="badge">nml</span></li>
+                        <li class="list-group-item">Windows Media Player, old <span class="badge">asx</span></li>
+                        <li class="list-group-item">Windows Media Player, current <span class="badge">wpl</span></li>
+                        <li class="list-group-item">iTunes <span class="badge">xml</span></li>
+                        <li class="list-group-item">Generic M3U file <span class="badge">m3u</span></li>
+                        <li class="list-group-item">Playlist file <span class="badge">pls</span></li>
+                    </ul>
+                </div>
+
+                <div class="bs-callout">
+                    <h3>Usage:</h3>
+                    <p>Select your playlist from your harddrive. Once selected the parser will immediatelly display your playlist in a form (only Artist and Title will be displayed).</p>
+                </div>
+
+                <p>
+                    <input type="file" id="fileinput" name="fileinput" class="hideBrowse" multiple />
+                    <label for="fileinput" class="btn btn-lg btn-success">Select file</label>
+                </p>
+            </div>
+
+            <div id="content" class="row marketing">
+
+                <div id="wrap" class="wrap">
+                    <div id="filename" class="filename"></div>
+
+                    <form>
+                        <div id="playlist"></div>
+                        <!--button>Save to database</button-->
+                    </form>
+                    
+                </div>
+
+            </div>
+
+            <footer class="footer">
+                <p>© Stefan Blattmann 2014</p>
+            </footer>
+
         </div>
 
-        <footer>
+        <!-- jQuery -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-        </footer>
+        <!-- Bootstrap -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
-        <!-- Vendor Libs: jQuery only used for Bootstrap functionality -->
-        <script src="libs/jquery-1.9.1.min.js"></script>
+        <!-- Project scripts -->
+        <script src="./scripts/parser.js"></script>
 
-        <!-- UI Libs -->
-        <script src="libs/bootstrap.min.js"></script>
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="./scripts/ie10-viewport-bug-workaround.js"></script>
 
-        <!-- project scripts -->
-        <script src="scripts/parser.js"></script>
     </body>
 </html>
