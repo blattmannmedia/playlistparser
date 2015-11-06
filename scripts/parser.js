@@ -54,7 +54,7 @@ var readMultipleFiles = function(event) {
     } else {
         $('#playlist').append("Failed to load files");
     }
-}
+};
 
 var parseXml = function(contents, extension) {
     var i = 0, j = i,
@@ -107,7 +107,7 @@ var parseXml = function(contents, extension) {
             fileTitle = '';
         }
     });
-}
+};
 
 var parseWpl = function(contents) {
     var i = 0, j = i,
@@ -137,7 +137,7 @@ var parseWpl = function(contents) {
             sendOutput(i, j, fileArtist, fileTitle);
         }
     });
-}
+};
 
 var parseM3u = function(contents) {
     var i = 0, j = i, k = i,
@@ -169,7 +169,7 @@ var parseM3u = function(contents) {
             sendOutput(k, j, fileArtist, fileTitle);
         }
     }
-}
+};
 
 var parsePls = function(contents) {
     var i = 0, j = i, k = i,
@@ -202,7 +202,7 @@ var parsePls = function(contents) {
             sendOutput(k, j, fileArtist, fileTitle);
         }
     }
-}
+};
 
 // Append to HTML
 var sendOutput = function(i, j, artist, title) {
@@ -215,7 +215,7 @@ var sendOutput = function(i, j, artist, title) {
     fileOutput += '</div>';
 
     $('#playlist').append(fileOutput);
-}
+};
 
 /*
 --- *.m3u working example - Extended M3U ---
